@@ -3,7 +3,7 @@ var __ = wp.i18n.__;
 var el = wp.element.createElement;
 
 registerBlockType('mytheme-blocks/firstblock', {
-    title: __('First Block', 'mytheme-blocks'),
+    title: __('The First Block', 'mytheme-blocks'),
     description: __('Our first block', 'mytheme-blocks'),
     category: 'layout',
     icon: {
