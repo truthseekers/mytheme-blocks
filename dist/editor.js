@@ -125,17 +125,23 @@ registerBlockType('mytheme-blocks/firstblock', {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _styles_editor_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.editor.scss */ "./src/blocks/secondblock/styles.editor.scss");
-/* harmony import */ var _styles_editor_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_styles_editor_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _styles_editor_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.editor.scss */ "./src/blocks/secondblock/styles.editor.scss");
+/* harmony import */ var _styles_editor_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styles_editor_scss__WEBPACK_IMPORTED_MODULE_2__);
 var _jsxFileName = "C:\\wamp64\\www\\wordpress\\wp-content\\plugins\\mytheme-blocks\\src\\blocks\\secondblock\\index.js",
     _this = undefined;
 
 
-var registerBlockType = wp.blocks.registerBlockType;
-var __ = wp.i18n.__;
-registerBlockType('mytheme-blocks/secondblock', {
-  title: __('Second Block', 'mytheme-blocks'),
-  description: __('Our second block', 'mytheme-blocks'),
+
+ //const { registerBlockType } = wp.blocks;
+//const { __ } = wp.i18n;
+
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])('mytheme-blocks/secondblock', {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Second Block', 'mytheme-blocks'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Our second block', 'mytheme-blocks'),
   category: 'layout',
   icon: {
     background: '#f03',
@@ -148,7 +154,7 @@ registerBlockType('mytheme-blocks/secondblock', {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 13,
+        lineNumber: 16,
         columnNumber: 14
       }
     }, wp.element.createElement("path", {
@@ -157,7 +163,7 @@ registerBlockType('mytheme-blocks/secondblock', {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 13,
+        lineNumber: 16,
         columnNumber: 97
       }
     }), wp.element.createElement("path", {
@@ -165,12 +171,12 @@ registerBlockType('mytheme-blocks/secondblock', {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 13,
+        lineNumber: 16,
         columnNumber: 134
       }
     }))
   },
-  keywords: [__('Photo', 'mytheme-blocks'), __('Image', 'mytheme-blocks')],
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Photo', 'mytheme-blocks'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Image', 'mytheme-blocks')],
   edit: function edit(_ref) {
     var className = _ref.className;
     return wp.element.createElement("p", {
@@ -178,7 +184,7 @@ registerBlockType('mytheme-blocks/secondblock', {
       __self: _this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 17,
+        lineNumber: 20,
         columnNumber: 16
       }
     }, "Editor");
@@ -188,7 +194,7 @@ registerBlockType('mytheme-blocks/secondblock', {
       __self: _this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 20,
+        lineNumber: 23,
         columnNumber: 16
       }
     }, "Saved Content");
@@ -222,6 +228,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_secondblock__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./blocks/secondblock */ "./src/blocks/secondblock/index.js");
 
 
+
+/***/ }),
+
+/***/ "@wordpress/blocks":
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = wp["blocks"];
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = wp["i18n"];
 
 /***/ })
 

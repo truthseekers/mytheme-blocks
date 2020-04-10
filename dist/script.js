@@ -97,9 +97,12 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/secondblock/style.scss");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
 
-var $ = jQuery;
-$(document).on("click", ".wp-block-mytheme-blocks-secondblock", function () {
+ //const $ = jQuery;
+
+jquery__WEBPACK_IMPORTED_MODULE_1___default()(document).on("click", ".wp-block-mytheme-blocks-secondblock", function () {
   alert(true);
 });
 
@@ -127,6 +130,17 @@ $(document).on("click", ".wp-block-mytheme-blocks-secondblock", function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_secondblock_script__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./blocks/secondblock/script */ "./src/blocks/secondblock/script.js");
 
+
+/***/ }),
+
+/***/ "jquery":
+/*!*************************!*\
+  !*** external "jQuery" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = jQuery;
 
 /***/ })
 

@@ -1,7 +1,10 @@
+import { registerBlockType } from '@wordpress/blocks';
+import { __ } from '@wordpress/i18n';
+
 import './styles.editor.scss';
 
-const { registerBlockType } = wp.blocks;
-const { __ } = wp.i18n;
+//const { registerBlockType } = wp.blocks;
+//const { __ } = wp.i18n;
 
 registerBlockType('mytheme-blocks/secondblock', {
     title: __('Second Block', 'mytheme-blocks'),
