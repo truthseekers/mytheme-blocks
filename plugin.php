@@ -37,7 +37,7 @@ function mytheme_blocks_register() {
     wp_register_script(
         'mytheme-blocks-script',
         plugins_url('dist/script.js', __FILE__),
-        array('')
+        array('jquery')
     );
 
     wp_register_style(
