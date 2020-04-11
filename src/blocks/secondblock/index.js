@@ -5,6 +5,7 @@ PanelColorSettings } from "@wordpress/editor";
 import { Toolbar, DropdownMenu, ToggleControl } from "@wordpress/components";
  // <> and </> is shortcut for "fragment"
 import './styles.editor.scss';
+import Edit from './edit';
 
 //const { registerBlockType } = wp.blocks;
 //const { __ } = wp.i18n;
@@ -51,7 +52,8 @@ registerBlockType('mytheme-blocks/secondblock', {
             type: 'string',
         },
     },
-    edit: ({ className, attributes, setAttributes }) => {
+    edit: Edit,
+    edit2: ({ className, attributes, setAttributes }) => {
         //console.log(attributes);
         const { content, alignment, backgroundColor, textColor } = attributes;
         const onChangeContent = (content) => {
