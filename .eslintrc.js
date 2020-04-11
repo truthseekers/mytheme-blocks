@@ -12,6 +12,7 @@ module.exports = {
         "SharedArrayBuffer": "readonly",
         "wp": "readonly",
     },
+    parser: "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
