@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import { RichText, BlockControls } from "@wordpress/editor";
+import { RichText, BlockControls, AlignmentToolbar } from "@wordpress/editor";
 import { Toolbar, DropdownMenu } from "@wordpress/components";
  // <> and </> is shortcut for "fragment"
 import './styles.editor.scss';
@@ -23,13 +23,19 @@ registerBlockType('mytheme-blocks/secondblock', {
             type: 'string',
             source: 'html',
             selector: 'p'
+        },
+        alignment: {
+            type: 'string'
         }
     },
     edit: ({ className, attributes, setAttributes }) => {
         //console.log(attributes);
-        const { content } = attributes;
+        const { content, alignment } = attributes;
         const onChangeContent = (content) => {
             setAttributes({content})
+        }
+        const onChangeAlignment = (alignment) => {
+            setAttributes({alignment})
         }
         return (
             <>
@@ -38,7 +44,7 @@ registerBlockType('mytheme-blocks/secondblock', {
                         [{
                             icon: 'wordpress',
                             title: __('test', 'mytheme-blocks'),
-                            onClick: () => alert(true),
+                            onClick: () => onChangeAlignment('right'),
                             isActive: true
                         }],
                         [{
@@ -49,6 +55,10 @@ registerBlockType('mytheme-blocks/secondblock', {
                         }]
                     ]}
                 >
+                    <AlignmentToolbar
+                        value={alignment}
+                        onChange={onChangeAlignment}
+                    />
                     <Toolbar
                         isCollapsed
                         controls={[
@@ -90,21 +100,23 @@ registerBlockType('mytheme-blocks/secondblock', {
                     }
                 </BlockControls>
                 <RichText
-                tagName="p"
-                className={ className } 
-                onChange={ onChangeContent }
-                value={content}
-                formattingControls={['bold']}
+                    tagName="p"
+                    className={ className } 
+                    onChange={ onChangeContent }
+                    value={content}
+                    formattingControls={['bold']}
+                    style={{ textAlign: alignment }}
                 />
                 {/* return <p className={className}>Editor</p>; */}
             </>
         )
     },
     save: ({ attributes }) => {
-        const { content } = attributes;
+        const { content, alignment } = attributes;
         return <RichText.Content
             tagName="p"
             value={ content }
+            style={{textAlign: alignment}}
         />;
         //return <p>{content}</p>
         //return <p>Saved Content</p>;
