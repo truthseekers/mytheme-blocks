@@ -1,7 +1,8 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import { RichText } from "@wordpress/editor";
-
+import { RichText, BlockControls } from "@wordpress/editor";
+import { Toolbar, DropdownMenu } from "@wordpress/components";
+ // <> and </> is shortcut for "fragment"
 import './styles.editor.scss';
 
 //const { registerBlockType } = wp.blocks;
@@ -25,19 +26,79 @@ registerBlockType('mytheme-blocks/secondblock', {
         }
     },
     edit: ({ className, attributes, setAttributes }) => {
-        console.log(attributes);
+        //console.log(attributes);
         const { content } = attributes;
         const onChangeContent = (content) => {
             setAttributes({content})
         }
-        return <RichText
-        tagName="p"
-        className={ className } 
-        onChange={ onChangeContent }
-        value={content}
-        formattingControls={['bold']}
-        />
-        //return <p className={className}>Editor</p>;
+        return (
+            <>
+                <BlockControls 
+                    controls={[
+                        [{
+                            icon: 'wordpress',
+                            title: __('test', 'mytheme-blocks'),
+                            onClick: () => alert(true),
+                            isActive: true
+                        }],
+                        [{
+                            icon: 'wordpress',
+                            title: __('test', 'mytheme-blocks'),
+                            onClick: () => alert(true),
+                            isActive: false 
+                        }]
+                    ]}
+                >
+                    <Toolbar
+                        isCollapsed
+                        controls={[
+                            [{
+                                icon: 'wordpress',
+                                title: __('yodog', 'mytheme-blocks'),
+                                onClick: () => alert(true),
+                                isActive: true
+                            }],
+                            [{
+                                icon: 'wordpress',
+                                title: __('test', 'mytheme-blocks'),
+                                onClick: () => alert(true),
+                                isActive: false 
+                            }]
+                        ]}
+                    />
+                    {(content && content.length > 0) &&
+                        <Toolbar>
+                            <DropdownMenu
+                                icon="editor-table"
+                                label={ __('testDropdown', 'mytheme-blocks')}
+                                controls={[
+                                    [{
+                                        icon: 'wordpress',
+                                        title: __('yodog', 'mytheme-blocks'),
+                                        onClick: () => alert(true),
+                                        isActive: true
+                                    }],
+                                    [{
+                                        icon: 'wordpress',
+                                        title: __('test', 'mytheme-blocks'),
+                                        onClick: () => alert(true),
+                                        isActive: false 
+                                    }]
+                                ]}
+                            />
+                        </Toolbar>
+                    }
+                </BlockControls>
+                <RichText
+                tagName="p"
+                className={ className } 
+                onChange={ onChangeContent }
+                value={content}
+                formattingControls={['bold']}
+                />
+                {/* return <p className={className}>Editor</p>; */}
+            </>
+        )
     },
     save: ({ attributes }) => {
         const { content } = attributes;
