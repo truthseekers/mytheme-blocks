@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack --mode=development --watch",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production && gulp bundle"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@wordpress/blocks": "^6.13.0",
     "@wordpress/i18n": "^3.10.0",
+    "gulp": "^4.0.2",
     "jquery": "^3.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
@@ -34,6 +35,7 @@
     "browserslist": "^4.11.1",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.5.1",
+    "gulp-zip": "^5.0.1",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
