@@ -12,7 +12,7 @@ import './styles.editor.scss';
 registerBlockType('mytheme-blocks/secondblock', {
     title: __('Second Block', 'mytheme-blocks'),
     description: __('Our second block', 'mytheme-blocks'),
-    category: 'layout',
+    category: 'mytheme-category',
     icon: {
         background: '#f03',
         foreground: '#fff',
