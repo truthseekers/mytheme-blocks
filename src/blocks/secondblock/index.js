@@ -39,65 +39,11 @@ registerBlockType('mytheme-blocks/secondblock', {
         }
         return (
             <>
-                <BlockControls 
-                    controls={[
-                        [{
-                            icon: 'wordpress',
-                            title: __('test', 'mytheme-blocks'),
-                            onClick: () => onChangeAlignment('right'),
-                            isActive: true
-                        }],
-                        [{
-                            icon: 'wordpress',
-                            title: __('test', 'mytheme-blocks'),
-                            onClick: () => alert(true),
-                            isActive: false 
-                        }]
-                    ]}
-                >
+                <BlockControls>
                     <AlignmentToolbar
                         value={alignment}
                         onChange={onChangeAlignment}
                     />
-                    <Toolbar
-                        isCollapsed
-                        controls={[
-                            [{
-                                icon: 'wordpress',
-                                title: __('yodog', 'mytheme-blocks'),
-                                onClick: () => alert(true),
-                                isActive: true
-                            }],
-                            [{
-                                icon: 'wordpress',
-                                title: __('test', 'mytheme-blocks'),
-                                onClick: () => alert(true),
-                                isActive: false 
-                            }]
-                        ]}
-                    />
-                    {(content && content.length > 0) &&
-                        <Toolbar>
-                            <DropdownMenu
-                                icon="editor-table"
-                                label={ __('testDropdown', 'mytheme-blocks')}
-                                controls={[
-                                    [{
-                                        icon: 'wordpress',
-                                        title: __('yodog', 'mytheme-blocks'),
-                                        onClick: () => alert(true),
-                                        isActive: true
-                                    }],
-                                    [{
-                                        icon: 'wordpress',
-                                        title: __('test', 'mytheme-blocks'),
-                                        onClick: () => alert(true),
-                                        isActive: false 
-                                    }]
-                                ]}
-                            />
-                        </Toolbar>
-                    }
                 </BlockControls>
                 <RichText
                     tagName="p"
