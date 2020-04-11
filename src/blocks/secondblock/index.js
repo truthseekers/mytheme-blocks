@@ -51,10 +51,18 @@ registerBlockType('mytheme-blocks/secondblock', {
         textColor: {
             type: 'string',
         },
+        customBackgroundColor: {
+            type: 'string',
+        },
+        customTextColor: {
+            type: 'string',
+        },
     },
     edit: Edit,
     save: ({ attributes }) => {
         const { content, alignment, backgroundColor, textColor } = attributes;
+        console.log("save color is: ");
+        console.log(textColor);
         return <RichText.Content
             tagName="p"
             value={ content }
