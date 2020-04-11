@@ -1,7 +1,7 @@
 import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { RichText, BlockControls, InspectorControls, AlignmentToolbar,
-PanelColorSettings } from "@wordpress/editor";
+PanelColorSettings, withColors } from "@wordpress/editor";
 
 class Edit extends Component {
 
@@ -19,6 +19,7 @@ class Edit extends Component {
     }
 
     render() {
+        console.log(this.props);
         const { className, attributes, setAttributes } = this.props;
         const { content, alignment, backgroundColor, textColor } = attributes;
         return (
@@ -59,6 +60,6 @@ class Edit extends Component {
             </>
         )
     }
-}
-
-export default Edit;
+}   
+// look in the console when in editor and notice available "props" like setbackgroundColor and setTextColor
+export default withColors('backgroundColor', 'textColor', )(Edit);
