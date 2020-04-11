@@ -1,7 +1,8 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import { RichText, BlockControls, InspectorControls, AlignmentToolbar } from "@wordpress/editor";
-import { Toolbar, DropdownMenu, PanelBody, ToggleControl, ColorPicker, ColorPalette } from "@wordpress/components";
+import { RichText, BlockControls, InspectorControls, AlignmentToolbar,
+PanelColorSettings } from "@wordpress/editor";
+import { Toolbar, DropdownMenu, PanelBody, ToggleControl } from "@wordpress/components";
  // <> and </> is shortcut for "fragment"
 import './styles.editor.scss';
 
@@ -52,19 +53,21 @@ registerBlockType('mytheme-blocks/secondblock', {
         return (
             <>
                 <InspectorControls>
-                    <PanelBody title={__('Panel', 'mytheme-blocks')}>
-                        {/* <ColorPicker 
-                            color="#f03"
-                            onChangeComplete={(v) => console.log(v)}
-                        /> */}
-                        <ColorPalette 
-                            colors={[
-                                {color: '#f03'},
-                                {color: 'blue'},
-                            ]}
-                            onChange={onChangeBackgroundColor }
-                        />
-                    </PanelBody>
+                    <PanelColorSettings
+                        title={ __('Panel', 'mytheme-blocks')}
+                        colorSettings={[
+                            {
+                                value: backgroundColor,
+                                onChange: onChangeBackgroundColor,
+                                label:  __('Background Color', 'mytheme-blocks')
+                            },
+                            {
+                                value: textColor,
+                                onChange: onChangeTextColor,
+                                label:  __('Text Color', 'mytheme-blocks')
+                            }
+                        ]}
+                    />
                 </InspectorControls>
                 <BlockControls>
                     <AlignmentToolbar
