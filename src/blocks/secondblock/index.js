@@ -26,16 +26,28 @@ registerBlockType('mytheme-blocks/secondblock', {
         },
         alignment: {
             type: 'string'
-        }
+        },
+        backgroundColor: {
+            type: 'string',
+        },
+        textColor: {
+            type: 'string',
+        },
     },
     edit: ({ className, attributes, setAttributes }) => {
         //console.log(attributes);
-        const { content, alignment } = attributes;
+        const { content, alignment, backgroundColor, textColor } = attributes;
         const onChangeContent = (content) => {
             setAttributes({content})
         }
         const onChangeAlignment = (alignment) => {
             setAttributes({alignment})
+        }
+        const onChangeBackgroundColor = (backgroundColor) => {
+            setAttributes({backgroundColor})
+        }
+        const onChangeTextColor = (textColor) => {
+            setAttributes({textColor})
         }
         return (
             <>
@@ -50,7 +62,7 @@ registerBlockType('mytheme-blocks/secondblock', {
                                 {color: '#f03'},
                                 {color: 'blue'},
                             ]}
-                            onChange={(value) => console.log(value)}
+                            onChange={onChangeBackgroundColor }
                         />
                     </PanelBody>
                 </InspectorControls>
@@ -66,18 +78,20 @@ registerBlockType('mytheme-blocks/secondblock', {
                     onChange={ onChangeContent }
                     value={content}
                     formattingControls={['bold']}
-                    style={{ textAlign: alignment }}
+                    style={{ textAlign: alignment, backgroundColor: backgroundColor,
+                        color: textColor }}
                 />
                 {/* return <p className={className}>Editor</p>; */}
             </>
         )
     },
     save: ({ attributes }) => {
-        const { content, alignment } = attributes;
+        const { content, alignment, backgroundColor, textColor } = attributes;
         return <RichText.Content
             tagName="p"
             value={ content }
-            style={{textAlign: alignment}}
+            style={{ textAlign: alignment, backgroundColor: backgroundColor,
+                color: textColor }}
         />;
         //return <p>{content}</p>
         //return <p>Saved Content</p>;
