@@ -19,7 +19,9 @@ registerBlockType('mytheme-blocks/secondblock', {
     keywords: [__('Photo', 'mytheme-blocks'), __('Image', 'mytheme-blocks')],
     attributes: {
         content: {
-            type: 'string'
+            type: 'string',
+            source: 'html',
+            selector: 'p'
         }
     },
     edit: ({ className, attributes, setAttributes }) => {
