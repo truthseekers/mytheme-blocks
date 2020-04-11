@@ -1,7 +1,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import { RichText, BlockControls, AlignmentToolbar } from "@wordpress/editor";
-import { Toolbar, DropdownMenu } from "@wordpress/components";
+import { RichText, BlockControls, InspectorControls, AlignmentToolbar } from "@wordpress/editor";
+import { Toolbar, DropdownMenu, PanelBody, ToggleControl, ColorPicker, ColorPalette } from "@wordpress/components";
  // <> and </> is shortcut for "fragment"
 import './styles.editor.scss';
 
@@ -39,6 +39,21 @@ registerBlockType('mytheme-blocks/secondblock', {
         }
         return (
             <>
+                <InspectorControls>
+                    <PanelBody title={__('Panel', 'mytheme-blocks')}>
+                        {/* <ColorPicker 
+                            color="#f03"
+                            onChangeComplete={(v) => console.log(v)}
+                        /> */}
+                        <ColorPalette 
+                            colors={[
+                                {color: '#f03'},
+                                {color: 'blue'},
+                            ]}
+                            onChange={(value) => console.log(value)}
+                        />
+                    </PanelBody>
+                </InspectorControls>
                 <BlockControls>
                     <AlignmentToolbar
                         value={alignment}
