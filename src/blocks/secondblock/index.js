@@ -37,7 +37,13 @@ registerBlockType('mytheme-blocks/secondblock', {
         />
         //return <p className={className}>Editor</p>;
     },
-    save: () => {
-        return <p>Saved Content</p>;
+    save: ({ attributes }) => {
+        const { content } = attributes;
+        return <RichText.Content
+            tagName="p"
+            value={ content }
+        />;
+        //return <p>{content}</p>
+        //return <p>Saved Content</p>;
     }
 })
