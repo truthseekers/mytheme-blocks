@@ -1,7 +1,7 @@
 import './style.editor.scss';
 import { registerBlockType } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
-
+import edit from './edit';
 const attributes = {
     title: {
         type: 'string',
@@ -24,15 +24,12 @@ registerBlockType( 'mytheme-blocks/team-member', {
 
     category: "mytheme-category",
 
-    keywords: [ __( 'team' ), __( 'member'), __( 'person' )],
+    keywords: [ __( 'team', 'mytheme-blocks' ), __( 'member', 'mytheme-blocks'), __( 'person', 'mytheme-blocks' )],
 
     attributes,
 
     save: () => {
         return null
     },
-
-    edit: () => {
-        return null
-    }
+    edit
 });
