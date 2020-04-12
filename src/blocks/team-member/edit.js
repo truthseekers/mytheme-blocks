@@ -25,7 +25,7 @@ class TeamMemberEdit extends Component {
                 />
                 <RichText
                     className={'wp-block-mytheme-blocks-team-member__info'}
-                    tagName="h4"
+                    tagName="p"
                     onChange={ this.onChangeInfo }
                     value={info}
                     placeholder={__("Member Info", "mytheme-blocks")}

@@ -2,6 +2,7 @@ import './style.editor.scss';
 import { registerBlockType } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
 import edit from './edit';
+import { RichText } from "@wordpress/editor";
 const attributes = {
     title: {
         type: 'string',
@@ -28,8 +29,26 @@ registerBlockType( 'mytheme-blocks/team-member', {
 
     attributes,
 
-    save: () => {
-        return null
+    save: ({attributes}) => {
+        const { title, info } = attributes;
+        return (
+            <div>
+                {title &&
+                    <RichText.Content
+                        className={'wp-block-mytheme-blocks-team-member__title'}
+                        tagName="h4"
+                        value={title}
+                    />
+                }
+                {info &&
+                    <RichText.Content
+                        className={'wp-block-mytheme-blocks-team-member__info'}
+                        tagName="p"
+                        value={info}
+                    />
+                }
+            </div>
+        )
     },
     edit
 });
