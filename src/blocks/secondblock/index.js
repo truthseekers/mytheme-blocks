@@ -7,6 +7,7 @@ import { Toolbar, DropdownMenu, ToggleControl } from "@wordpress/components";
 import './styles.editor.scss';
 import Edit from './edit';
 import classnames from 'classnames';
+import { omit } from 'lodash';
 
 //const { registerBlockType } = wp.blocks;
 //const { __ } = wp.i18n;
@@ -18,6 +19,9 @@ const attributes = {
         selector: 'h4'
     },
     alignment: {
+        type: 'string'
+    },
+    textAlignment: {
         type: 'string'
     },
     backgroundColor: {
@@ -72,13 +76,58 @@ registerBlockType('mytheme-blocks/secondblock', {
     attributes,
     deprecated: [
         {
-            attributes: {
+            attributes: omit({
+                ...attributes,
+            }, ['textAlignment']),
+            migrate: ( attributes ) => {
+                return omit({
+                    ...attributes,
+                    textAlignment: attributes.alignment
+                }, ['alignment']) 
+            },
+            save: ({ attributes }) => {
+                const { content, alignment, backgroundColor, textColor, customBackgroundColor,
+                customTextColor, shadow, shadowOpacity } = attributes;
+    
+                const backgroundClass = getColorClassName('background-color', backgroundColor);
+                const textClass = getColorClassName('color', textColor);
+    
+                const classes = classnames({
+                    [backgroundClass]: backgroundClass,
+                    [textClass]: textClass,
+                    'has-shadow': shadow,
+                    [`shadow-opacity-${shadowOpacity * 100}`]: shadowOpacity
+                })
+                
+                
+                return <RichText.Content
+                    tagName="h4"
+                    className={ classes }
+                    value={ content }
+                    style={{
+                        textAlign: alignment,
+                        backgroundColor: backgroundClass ? undefined : customBackgroundColor,
+                        color: textClass ? undefined : customTextColor
+                    }}
+                />;
+                //return <p>{content}</p>
+                //return <p>Saved Content</p>;
+            }
+        },
+        {
+            attributes: omit({
                 ...attributes,
                 content: {
                     type: 'string',
                     source: 'html',
                     selector: 'p'
                 },
+            }, ['textAlignment']),
+            migrate: ( attributes ) => {
+                return omit({
+                    ...attributes,
+                    textAlignment: attributes.alignment
+                }, ['alignment']) 
             },
             save: ({ attributes }) => {
                 const { content, alignment, backgroundColor, textColor, customBackgroundColor,
@@ -112,7 +161,7 @@ registerBlockType('mytheme-blocks/secondblock', {
     ],
     edit: Edit,
     save: ({ attributes }) => {
-        const { content, alignment, backgroundColor, textColor, customBackgroundColor,
+        const { content, textAlignment, backgroundColor, textColor, customBackgroundColor,
         customTextColor, shadow, shadowOpacity } = attributes;
 
         const backgroundClass = getColorClassName('background-color', backgroundColor);
@@ -124,14 +173,14 @@ registerBlockType('mytheme-blocks/secondblock', {
             'has-shadow': shadow,
             [`shadow-opacity-${shadowOpacity * 100}`]: shadowOpacity
         })
-        
-        
+            
+            
         return <RichText.Content
             tagName="h4"
             className={ classes }
             value={ content }
             style={{
-                textAlign: alignment,
+                textAlign: textAlignment,
                 backgroundColor: backgroundClass ? undefined : customBackgroundColor,
                 color: textClass ? undefined : customTextColor
             }}
