@@ -13,12 +13,12 @@ class Edit extends Component {
     }
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         const { className, attributes, setTextColor, setBackgroundColor,
         backgroundColor, textColor } = this.props;
         const { content, alignment } = attributes;
-        console.log("color is: "); 
-        console.log(textColor);
+        //console.log("color is: "); 
+        //console.log(textColor);
         return (
             <>
                 <InspectorControls>

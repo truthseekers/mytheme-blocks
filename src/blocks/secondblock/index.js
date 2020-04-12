@@ -1,11 +1,12 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import { RichText, BlockControls, InspectorControls, AlignmentToolbar,
+import { RichText, getColorClassName, BlockControls, InspectorControls, AlignmentToolbar,
 PanelColorSettings } from "@wordpress/editor";
 import { Toolbar, DropdownMenu, ToggleControl } from "@wordpress/components";
  // <> and </> is shortcut for "fragment"
 import './styles.editor.scss';
 import Edit from './edit';
+import classnames from 'classnames';
 
 //const { registerBlockType } = wp.blocks;
 //const { __ } = wp.i18n;
@@ -60,14 +61,27 @@ registerBlockType('mytheme-blocks/secondblock', {
     },
     edit: Edit,
     save: ({ attributes }) => {
-        const { content, alignment, backgroundColor, textColor } = attributes;
-        console.log("save color is: ");
-        console.log(textColor);
+        const { content, alignment, backgroundColor, textColor, customBackgroundColor,
+        customTextColor } = attributes;
+
+        const backgroundClass = getColorClassName('background-color', backgroundColor);
+        const textClass = getColorClassName('color', textColor);
+
+        const classes = classnames({
+            [backgroundClass]: backgroundClass,
+            [textClass]: textClass,
+        })
+        
+        
         return <RichText.Content
             tagName="p"
+            className={ classes }
             value={ content }
-            style={{ textAlign: alignment, backgroundColor: backgroundColor,
-                color: textColor }}
+            style={{
+                textAlign: alignment,
+                backgroundColor: backgroundClass ? undefined : customBackgroundColor,
+                color: textClass ? undefined : customTextColor
+            }}
         />;
         //return <p>{content}</p>
         //return <p>Saved Content</p>;
