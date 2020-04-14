@@ -19,6 +19,10 @@ registerBlockType('mytheme-blocks/team-members', {
 
     category: 'mytheme-category',
 
+    supports: {
+        html: false
+    },
+
     keywords: [ __('item', 'mytheme-blocks' ), __( 'member', 'mytheme-blocks' ),
     __( 'person', 'mytheme-blocks' ) ],
 
