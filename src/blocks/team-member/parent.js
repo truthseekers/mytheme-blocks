@@ -1,6 +1,14 @@
 import { registerBlockType } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
-import { InnerBlocks } from "@wordpress/editor";
+import { InnerBlocks, InspectorControls } from "@wordpress/editor";
+import { PanelBody, RangeControl } from "@wordpress/components";
+const attributes = {
+    columns: {
+        type: 'number',
+        default: 2
+    }
+}
+
 
 registerBlockType('mytheme-block/team-members', {
     title: __( 'Team Members', 'mytheme-blocks'),
@@ -14,11 +22,25 @@ registerBlockType('mytheme-block/team-members', {
     keywords: [ __('item', 'mytheme-blocks' ), __( 'member', 'mytheme-blocks' ),
     __( 'person', 'mytheme-blocks' ) ],
 
-    edit( { className }) {
+    attributes,
+
+    edit( { className, attributes, setAttributes }) {
+        const { columns } = attributes
         console.log("some inner block in here");
         console.log(className);
         return (
-            <div className={ className}>
+            <div className={ `${className} has-${columns}-columns`}>
+                <InspectorControls>
+                    <PanelBody>
+                        <RangeControl
+                            label={ __( 'Columns', 'mytheme-blocks' ) }
+                            value={ columns }
+                            onChange={ (columns) => setAttributes({ columns})}
+                            min={ 1 }
+                            max={ 6 }
+                        />
+                    </PanelBody>
+                </InspectorControls>
                 <InnerBlocks
                     allowedBlocks={ ['mytheme-blocks/team-member'] }
                     template={[
@@ -30,9 +52,10 @@ registerBlockType('mytheme-block/team-members', {
         )
     },
 
-    save() {
+    save( { attributes } ) {
+        const { columns } = attributes;
         return (
-            <div>
+            <div className={`has-${columns}-columns`}>
                 <InnerBlocks.Content />
             </div>
         )
