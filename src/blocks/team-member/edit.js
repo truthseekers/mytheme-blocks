@@ -12,16 +12,17 @@ class TeamMemberEdit extends Component {
         this.props.setAttributes({info})
     }
     onSelectImage = ({ id, url, alt}) => {
-        console.log("id: ");
-        console.log(id);
-        console.log("url");
-        console.log(url);
-        console.log("alt");
-        console.log(alt);
         this.props.setAttributes({
             id, url, alt
         })
     }
+    onSelectURL = (url => {
+        this.props.setAttributes({
+            url,
+            id: null,
+            alt: ""
+        })
+    })
 
     render() {
         const { className, attributes } = this.props;
@@ -38,7 +39,7 @@ class TeamMemberEdit extends Component {
                     : <MediaPlaceholder
                         icon="format-image"
                         onSelect={ this.onSelectImage }
-                        onSelectURL={(url) => console.log(attributes)}//console.log(url)}
+                        onSelectURL={ this.onSelectURL }//console.log(url)}
                         onError={(message) => console.log(message)}
                         accept="image/*"
                         allowedTypes={['image']}
