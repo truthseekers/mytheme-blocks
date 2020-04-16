@@ -1,8 +1,11 @@
 import { Component } from "@wordpress/element";
-import { RichText, MediaPlaceholder, BlockControls, MediaUpload, MediaUploadCheck } from "@wordpress/editor";
+import {
+    RichText, MediaPlaceholder, BlockControls, MediaUpload, MediaUploadCheck,
+    InspectorControls
+} from "@wordpress/editor";
 import { __ } from "@wordpress/i18n";
 import { isBlobURL } from '@wordpress/blob';
-import { Spinner, withNotices, Toolbar, IconButton } from "@wordpress/components";
+import { Spinner, withNotices, Toolbar, IconButton, PanelBody, TextareaControl } from "@wordpress/components";
 
 class TeamMemberEdit extends Component {
 
@@ -38,25 +41,37 @@ class TeamMemberEdit extends Component {
     onUploadError = (message) => {
         const { noticeOperations } = this.props;
         noticeOperations.createErrorNotice(message)
-        console.log(message)
     }
     removeImage = () => {
-        console.log("props before remove image");
-        console.log(this.props);
         this.props.setAttributes({
             id: null,
             url: '',
             alt: ''
         })
     }
+    updateAlt = (alt) => {
+        this.props.setAttributes({
+            alt
+        })
+    }
     render() {
-        console.log(this.props);
         const { className, attributes, noticeUI } = this.props;
         const { title, info, url, alt, id } = attributes;
-        console.log("attributes below:");
-        console.log(attributes);
         return (
             <>
+                <InspectorControls>
+                    <PanelBody title={__("Image Settings", "mytheme-blocks")}>
+                        {(url && !isBlobURL(url)) &&
+                            <TextareaControl
+                                label={__('Alt Text (Alternative Text)',
+                                    'mytheme-blocks')}
+                                value={alt}
+                                onChange={this.updateAlt}
+                                help={__('Alternative text describes your image to people who cannot see it. Add a short description with its details', 'mytheme-blocks')}
+                            />
+                        }
+                    </PanelBody>
+                </InspectorControls>
                 <BlockControls>
                     {url &&
                         <Toolbar>
@@ -97,7 +112,7 @@ class TeamMemberEdit extends Component {
                         : <MediaPlaceholder
                             icon="format-image"
                             onSelect={this.onSelectImage}
-                            onSelectURL={this.onSelectURL}//console.log(url)}
+                            onSelectURL={this.onSelectURL}
                             onError={this.onUploadError}
                             //accept="image/*"
                             allowedTypes={['image']}
