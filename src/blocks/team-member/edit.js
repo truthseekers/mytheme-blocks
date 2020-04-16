@@ -8,8 +8,8 @@ class TeamMemberEdit extends Component {
 
     componentDidMount() {
         const { attributes, setAttributes } = this.props;
-        const {url, id} = attributes;
-        if(url && isBlobURL(url) && !id) {
+        const { url, id } = attributes;
+        if (url && isBlobURL(url) && !id) {
             setAttributes({
                 url: '',
                 alt: ''
@@ -18,12 +18,12 @@ class TeamMemberEdit extends Component {
     }
 
     onChangeTitle = (title) => {
-        this.props.setAttributes({title})
+        this.props.setAttributes({ title })
     }
     onChangeInfo = (info) => {
-        this.props.setAttributes({info})
+        this.props.setAttributes({ info })
     }
-    onSelectImage = ({ id, url, alt}) => {
+    onSelectImage = ({ id, url, alt }) => {
         this.props.setAttributes({
             id, url, alt
         })
@@ -37,7 +37,7 @@ class TeamMemberEdit extends Component {
     }
     onUploadError = (message) => {
         const { noticeOperations } = this.props;
-        noticeOperations.createErrorNotice( message )
+        noticeOperations.createErrorNotice(message)
         console.log(message)
     }
     removeImage = () => {
@@ -64,14 +64,14 @@ class TeamMemberEdit extends Component {
                                 <MediaUploadCheck>
                                     <MediaUpload
                                         allowedTypes={['image']}
-                                        value={ id }
-                                        onSelect={ this.onSelectImage }
+                                        value={id}
+                                        onSelect={this.onSelectImage}
                                         render={({ open }) => {
                                             return (
                                                 <IconButton
                                                     className="components-icon-button components-toolbar__control"
-                                                    label={ __("Edit Image", "mytheme-blocks") }
-                                                    onClick={ open }
+                                                    label={__("Edit Image", "mytheme-blocks")}
+                                                    onClick={open}
                                                     icon="edit"
                                                 />
                                             )
@@ -81,14 +81,14 @@ class TeamMemberEdit extends Component {
                             }
                             <IconButton
                                 className="components-icon-button components-toolbar__control"
-                                label={ __("Remove Image", "mytheme-blocks") }
-                                onClick={ this.removeImage }
+                                label={__("Remove Image", "mytheme-blocks")}
+                                onClick={this.removeImage}
                                 icon="trash"
                             />
                         </Toolbar>
                     }
                 </BlockControls>
-                <div className={ className }>
+                <div className={className}>
                     {url ?
                         <>
                             <img src={url} alt={alt} />
@@ -96,29 +96,29 @@ class TeamMemberEdit extends Component {
                         </>
                         : <MediaPlaceholder
                             icon="format-image"
-                            onSelect={ this.onSelectImage }
-                            onSelectURL={ this.onSelectURL }//console.log(url)}
-                            onError={ this.onUploadError }
+                            onSelect={this.onSelectImage}
+                            onSelectURL={this.onSelectURL}//console.log(url)}
+                            onError={this.onUploadError}
                             //accept="image/*"
                             allowedTypes={['image']}
-                            notices={ noticeUI }
+                            notices={noticeUI}
                         />
                     }
                     <RichText
                         className={'wp-block-mytheme-blocks-team-member__title'}
                         tagName="h4"
-                        onChange={ this.onChangeTitle }
+                        onChange={this.onChangeTitle}
                         value={title}
                         placeholder={__("Member Name", "mytheme-blocks")}
-                        formattingControls={ [] }
+                        formattingControls={[]}
                     />
                     <RichText
                         className={'wp-block-mytheme-blocks-team-member__info'}
                         tagName="p"
-                        onChange={ this.onChangeInfo }
+                        onChange={this.onChangeInfo}
                         value={info}
                         placeholder={__("Member Info", "mytheme-blocks")}
-                        formattingControls={ [] }
+                        formattingControls={[]}
                     />
 
                 </div>
