@@ -11,9 +11,9 @@ const attributes = {
 
 
 registerBlockType('mytheme-blocks/team-members', {
-    title: __( 'Team Members', 'mytheme-blocks'),
+    title: __('Team Members', 'mytheme-blocks'),
 
-    description: __( 'Block showing a Team Members.', 'mytheme-blocks' ),
+    description: __('Block showing a Team Members.', 'mytheme-blocks'),
 
     icon: 'grid-view',
 
@@ -23,30 +23,28 @@ registerBlockType('mytheme-blocks/team-members', {
         html: false
     },
 
-    keywords: [ __('item', 'mytheme-blocks' ), __( 'member', 'mytheme-blocks' ),
-    __( 'person', 'mytheme-blocks' ) ],
+    keywords: [__('item', 'mytheme-blocks'), __('member', 'mytheme-blocks'),
+    __('person', 'mytheme-blocks')],
 
     attributes,
 
-    edit( { className, attributes, setAttributes }) {
+    edit({ className, attributes, setAttributes }) {
         const { columns } = attributes
-        console.log("some inner block in here");
-        console.log(className);
         return (
-            <div className={ `${className} has-${columns}-columns`}>
+            <div className={`${className} has-${columns}-columns`}>
                 <InspectorControls>
                     <PanelBody>
                         <RangeControl
-                            label={ __( 'Columns', 'mytheme-blocks' ) }
-                            value={ columns }
-                            onChange={ (columns) => setAttributes({ columns})}
-                            min={ 1 }
-                            max={ 6 }
+                            label={__('Columns', 'mytheme-blocks')}
+                            value={columns}
+                            onChange={(columns) => setAttributes({ columns })}
+                            min={1}
+                            max={6}
                         />
                     </PanelBody>
                 </InspectorControls>
                 <InnerBlocks
-                    allowedBlocks={ ['mytheme-blocks/team-member'] }
+                    allowedBlocks={['mytheme-blocks/team-member']}
                     template={[
                         ['mytheme-blocks/team-member'],
                         ['mytheme-blocks/team-member'],
@@ -56,7 +54,7 @@ registerBlockType('mytheme-blocks/team-members', {
         )
     },
 
-    save( { attributes } ) {
+    save({ attributes }) {
         const { columns } = attributes;
         return (
             <div className={`has-${columns}-columns`}>

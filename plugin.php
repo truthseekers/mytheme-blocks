@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: mytheme-blocks 222
  * Plugin URI: https://alialaa.com/
@@ -7,11 +8,12 @@
  * Author URI: https://alialaa.com/
  */
 
-if( ! defined( 'ABSPATH') ) {
+if (!defined('ABSPATH')) {
     exit;
 }
 
-function mytheme_blocks_categories( $categories, $post ) {
+function mytheme_blocks_categories($categories, $post)
+{
     return array_merge(
         $categories,
         array(
@@ -25,7 +27,8 @@ function mytheme_blocks_categories( $categories, $post ) {
 }
 add_filter('block_categories', 'mytheme_blocks_categories', 10, 2);
 
-function mytheme_blocks_register_block_type($block, $options = array()) {
+function mytheme_blocks_register_block_type($block, $options = array())
+{
     register_block_type(
         'mytheme-blocks/' . $block,
         array_merge(
@@ -40,12 +43,13 @@ function mytheme_blocks_register_block_type($block, $options = array()) {
     );
 }
 
-function mytheme_blocks_register() {
+function mytheme_blocks_register()
+{
 
     wp_register_script(
         'mytheme-blocks-editor-script',
         plugins_url('dist/editor.js', __FILE__),
-        array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components', 'lodash', 'wp-blob')
+        array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components', 'lodash', 'wp-blob', 'wp-data')
     );
 
     wp_register_script(
@@ -69,11 +73,6 @@ function mytheme_blocks_register() {
     mytheme_blocks_register_block_type('secondblock', array());
     mytheme_blocks_register_block_type('team-member');
     mytheme_blocks_register_block_type('team-members');
-
-
 }
 
 add_action('init', 'mytheme_blocks_register');
-
-
-?>
