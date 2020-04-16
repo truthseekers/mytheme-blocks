@@ -30,13 +30,20 @@ const attributes = {
         source: 'attribute',
         selector: 'img',
         attribute: 'src',
+    },
+    social: {
+        type: 'array',
+        default: [
+            { link: 'http://facebook.com', icon: 'wordpress' },
+            { link: 'http://facebook.com', icon: 'wordpress' },
+        ]
     }
 }
 
-registerBlockType( 'mytheme-blocks/team-member', {
-    title: __( 'Team Member', 'mytheme-blocks'),
+registerBlockType('mytheme-blocks/team-member', {
+    title: __('Team Member', 'mytheme-blocks'),
 
-    description: __( 'Block showing a Team Member.', 'mytheme-blocks' ),
+    description: __('Block showing a Team Member.', 'mytheme-blocks'),
 
     icon: 'admin-users',
 
@@ -49,16 +56,16 @@ registerBlockType( 'mytheme-blocks/team-member', {
 
     category: "mytheme-category",
 
-    keywords: [ __( 'team', 'mytheme-blocks' ), __( 'member', 'mytheme-blocks'), __( 'person', 'mytheme-blocks' )],
+    keywords: [__('team', 'mytheme-blocks'), __('member', 'mytheme-blocks'), __('person', 'mytheme-blocks')],
 
     attributes,
 
-    save: ({attributes}) => {
+    save: ({ attributes }) => {
         const { title, info, url, alt, id } = attributes;
         return (
             <div>
                 {url &&
-                    <img src={url} alt={alt} className={id ? `wp-image-${id}` : null } />
+                    <img src={url} alt={alt} className={id ? `wp-image-${id}` : null} />
                 }
                 {title &&
                     <RichText.Content
