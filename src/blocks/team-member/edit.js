@@ -10,6 +10,10 @@ import { Spinner, withNotices, Toolbar, IconButton, PanelBody, TextareaControl, 
 
 class TeamMemberEdit extends Component {
 
+    state = {
+        selectedLink: null
+    }
+
     componentDidMount() {
         const { attributes, setAttributes } = this.props;
         const { url, id } = attributes;
@@ -20,7 +24,13 @@ class TeamMemberEdit extends Component {
             })
         }
     }
-
+    componentDidUpdate(prevProps) {
+        if (prevProps.isSelected && !this.props.isSelected) {
+            this.setState({
+                selectedLink: null
+            })
+        }
+    }
     onChangeTitle = (title) => {
         this.props.setAttributes({ title })
     }
@@ -76,6 +86,16 @@ class TeamMemberEdit extends Component {
             }
         }
         return options;
+    }
+    addNewLink = () => {
+        const { setAttributes, attributes } = this.props;
+        const { social } = attributes;
+        setAttributes({
+            social: [...social, { icon: 'wordpress', link: '' }]
+        });
+        this.setState({
+            selectedLink: social.length
+        })
     }
     render() {
         const { className, attributes, noticeUI, isSelected } = this.props;
@@ -172,6 +192,8 @@ class TeamMemberEdit extends Component {
                                 return (
                                     <li
                                         key={index}
+                                        onClick={() => this.setState({ selectedLink: index })}
+                                        className={this.state.selectedLink === index ? 'is-selected' : null}
                                     >
                                         <Dashicon icon={item.icon} size={16} />
                                     </li>
@@ -180,7 +202,10 @@ class TeamMemberEdit extends Component {
                             {isSelected &&
                                 <li className={'wp-block-mytheme-blocks-team-member__adIconLI'}>
                                     <Tooltip text={__('Add Item', 'mytheme-blocks')}>
-                                        <button className={'wp-block-mytheme-blocks-team-member__addIcon'}>
+                                        <button
+                                            className={'wp-block-mytheme-blocks-team-member__addIcon'}
+                                            onClick={this.addNewLink}
+                                        >
                                             <Dashicon icon={'plus'} size={14} />
                                         </button>
                                     </Tooltip>
