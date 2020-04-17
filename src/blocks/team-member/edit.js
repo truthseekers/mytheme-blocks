@@ -97,6 +97,14 @@ class TeamMemberEdit extends Component {
             selectedLink: social.length
         })
     }
+    updateSocialItem = (type, value) => {
+        const { setAttributes, attributes } = this.props;
+        const { social } = attributes;
+        const { selectedLink } = this.state;
+        let new_social = [...social];
+        new_social[selectedLink][type] = value;
+        setAttributes({ social: new_social })
+    }
     render() {
         const { className, attributes, noticeUI, isSelected } = this.props;
         const { title, info, url, alt, id, social } = attributes;
@@ -217,9 +225,13 @@ class TeamMemberEdit extends Component {
                         <div className={'wp-block-mytheme-blocks-team-member__linkForm'}>
                             <TextControl
                                 label={__('Icon', 'mytheme-blocks')}
+                                value={social[this.state.selectedLink].icon}
+                                onChange={(icon) => this.updateSocialItem('icon', icon)}
                             />
                             <URLInput
                                 label={__('URL', 'mytheme-blocks')}
+                                value={social[this.state.selectedLink].link}
+                                onChange={(url) => this.updateSocialItem('link', url)}
                             />
                             <a
                                 className="wp-block-mytheme-blocks-team-member__removeLink"
