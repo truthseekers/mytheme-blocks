@@ -4,6 +4,7 @@ import { registerBlockType } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
 import edit from './edit';
 import { RichText } from "@wordpress/editor";
+import { Dashicon } from "@wordpress/components";
 const attributes = {
     title: {
         type: 'string',
@@ -36,7 +37,20 @@ const attributes = {
         default: [
             { link: 'http://facebook.com', icon: 'wordpress' },
             { link: 'http://facebook.com', icon: 'wordpress' },
-        ]
+        ],
+        source: 'query',
+        selector: '.wp-block-mytheme-blocks-team-member__social ul li',
+        query: {
+            icon: {
+                source: 'attribute',
+                attribute: 'data-icon'
+            },
+            link: {
+                source: 'attribute',
+                selector: 'a', // I believe this gets the "a tag" from the parent selector. In this case: .wp-block-mytheme-blocks-team-member__social ul li
+                attribute: 'href'
+            }
+        }
     }
 }
 
@@ -61,7 +75,7 @@ registerBlockType('mytheme-blocks/team-member', {
     attributes,
 
     save: ({ attributes }) => {
-        const { title, info, url, alt, id } = attributes;
+        const { title, info, url, alt, id, social } = attributes;
         return (
             <div>
                 {url &&
@@ -80,6 +94,21 @@ registerBlockType('mytheme-blocks/team-member', {
                         tagName="p"
                         value={info}
                     />
+                }
+                {social.length > 0 &&
+                    <div className={'wp-block-mytheme-blocks-team-member__social'}>
+                        <ul>
+                            {social.map((item, index) => {
+                                return (
+                                    <li key={index} data-icon={item.icon}>
+                                        <a href={item.link} target="_blank" rel="noopener noreferrer"> {/*this is the a tag that gets pulled from*/}
+                                            <Dashicon icon={item.icon} size={16} />
+                                        </a>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
                 }
             </div>
         )
