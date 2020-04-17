@@ -1,12 +1,12 @@
 import { Component } from "@wordpress/element";
 import {
     RichText, MediaPlaceholder, BlockControls, MediaUpload, MediaUploadCheck,
-    InspectorControls
+    InspectorControls, URLInput
 } from "@wordpress/editor";
 import { __ } from "@wordpress/i18n";
 import { isBlobURL } from '@wordpress/blob';
 import { withSelect } from "@wordpress/data";
-import { Spinner, withNotices, Toolbar, IconButton, PanelBody, TextareaControl, SelectControl, Dashicon, Tooltip } from "@wordpress/components";
+import { Spinner, withNotices, Toolbar, IconButton, PanelBody, TextareaControl, SelectControl, Dashicon, Tooltip, TextControl } from "@wordpress/components";
 
 class TeamMemberEdit extends Component {
 
@@ -213,7 +213,22 @@ class TeamMemberEdit extends Component {
                             }
                         </ul>
                     </div>
+                    {this.state.selectedLink !== null &&
+                        <div className={'wp-block-mytheme-blocks-team-member__linkForm'}>
+                            <TextControl
+                                label={__('Icon', 'mytheme-blocks')}
+                            />
+                            <URLInput
+                                label={__('URL', 'mytheme-blocks')}
+                            />
+                            <a
+                                className="wp-block-mytheme-blocks-team-member__removeLink"
 
+                            >
+                                {__('Remove Link', 'mytheme-blocks')}
+                            </a>
+                        </div>
+                    }
                 </div>
             </>
         )
