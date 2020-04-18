@@ -1,6 +1,6 @@
 import { Component } from '@wordpress/element';
 import { withSelect, withDispatch } from '@wordpress/data';
-import { composer } from "@wordpress/compose";
+import { compose } from "@wordpress/compose";
 
 class ReduxTodoEdit extends Component {
     render() {

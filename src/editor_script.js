@@ -1,1 +1,1 @@
-alert("yayaya");
+import './stores/todo';
