@@ -7,7 +7,7 @@ class ReduxTodoEdit extends Component {
         new_todo: ""
     };
     render() {
-        const { todos, addToDo } = this.props;
+        const { todos, addToDo, toggleToDo } = this.props;
         return (
             <div>
                 {todos.map((todo, index) => {
@@ -16,10 +16,15 @@ class ReduxTodoEdit extends Component {
                             key={index}
                             style={todo.completed ? { textDecoration: 'line-through', opacity: 0.5 } : undefined}
                         >
-                            <input type="checkbox" checked={todo.completed} />
+                            <input
+                                disabled={todo.loading}
+                                type="checkbox"
+                                checked={todo.completed}
+                                onChange={() => toggleToDo(todo, index)}
+                            />
                             {todo.title}
                         </div>
-                    )
+                    );
                 })}
                 <input
                     type="text"
@@ -28,25 +33,24 @@ class ReduxTodoEdit extends Component {
                 />
                 <button onClick={() => addToDo({ title: this.state.new_todo, completed: false })}>Add</button>
             </div>
-        )
+        );
     }
 }
 
 export default compose([
-    withSelect(
-        (select) => {
-            return {
-                todos: select('mytheme-blocks/todo').getTodos()
+    withSelect(select => {
+        return {
+            todos: select('mytheme-blocks/todo').getTodos()
+        };
+    }),
+    withDispatch(dispatch => {
+        return {
+            addToDo: item => {
+                dispatch('mytheme-blocks/todo').addToDo(item);
+            },
+            toggleToDo: (todo, index) => {
+                dispatch('mytheme-blocks/todo').toggleTodo(todo, index);
             }
-        }
-    ),
-    withDispatch(
-        (dispatch) => {
-            return {
-                addToDo: (item) => {
-                    dispatch('mytheme-blocks/todo').addToDo(item)
-                }
-            }
-        }
-    )
+        };
+    })
 ])(ReduxTodoEdit);
