@@ -73,6 +73,25 @@ function mytheme_blocks_register()
     mytheme_blocks_register_block_type('secondblock', array());
     mytheme_blocks_register_block_type('team-member');
     mytheme_blocks_register_block_type('team-members');
+    mytheme_blocks_register_block_type('latest-posts', array(
+        'render_callback' => 'mytheme_blocks_render_latest_posts_block',
+        'attributes' => array(
+            'numberOfPosts' => array(
+                'type' => 'number',
+                'default' => 5
+            ),
+            'postCategories' => array(
+                'type' => 'string'
+            )
+        )
+    ));
 }
 
 add_action('init', 'mytheme_blocks_register');
+
+// Dynamic blocks have attributes defined in php
+
+function mytheme_blocks_render_latest_posts_block($attributes)
+{
+    return '<p>defef</p>';
+}
