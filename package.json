@@ -22,6 +22,7 @@
     "@wordpress/blob": "^2.7.0",
     "@wordpress/blocks": "^6.13.0",
     "@wordpress/data": "^4.16.1",
+    "@wordpress/html-entities": "^2.7.0",
     "@wordpress/i18n": "^3.10.0",
     "gulp": "^4.0.2",
     "jquery": "^3.5.0",
