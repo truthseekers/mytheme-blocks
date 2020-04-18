@@ -34,10 +34,7 @@ const attributes = {
     },
     social: {
         type: 'array',
-        default: [
-            { link: 'http://facebook.com', icon: 'wordpress' },
-            { link: 'http://facebook.com', icon: 'wordpress' },
-        ],
+        default: [],
         source: 'query',
         selector: '.wp-block-mytheme-blocks-team-member__social ul li',
         query: {
