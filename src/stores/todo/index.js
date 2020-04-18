@@ -14,6 +14,11 @@ const actions = {
             type: 'ADD_TODO',
             item: item
         }
+    },
+    fetchTodos() {
+        return {
+            type: 'FETCH_TODOS'
+        }
     }
 }
 
@@ -40,14 +45,16 @@ registerStore('mytheme-blocks/todo', {
     reducer,
     selectors,
     actions,
-    resolvers: {
-        getTodos() {
-            fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
+    controls: {
+        FETCH_TODOS() {
+            return fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
                 .then(response => response.json())
-                .then(response => {
-                    dispatch('mytheme-blocks/todo').populateToDos(response)
-                    console.log(response);
-                })
+        }
+    },
+    resolvers: {
+        * getTodos() { // this is a generator function.
+            const todos = yield actions.fetchTodos();
+            return actions.populateToDos(todos);
         }
     }
 })
