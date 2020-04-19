@@ -38,7 +38,7 @@ function mytheme_blocks_register_block_type($block, $options = array())
                 'editor_script' => 'mytheme-blocks-editor-script',
                 'editor_style' => 'mytheme-blocks-editor-style',
                 'script' => 'mytheme-blocks-script',
-                'style' => 'mytheme-blocks-style',
+                'style' => 'mytheme-blocks-style'
             ),
             $options
         )
@@ -50,7 +50,7 @@ function mytheme_blocks_enqueue_assets()
     wp_enqueue_script(
         'mytheme-blocks-editor-js',
         plugins_url('dist/editor_script.js', __FILE__),
-        array('wp-data')
+        array('wp-data', 'wp-plugins', 'wp-edit-post', 'wp-i18n')
     );
 }
 
@@ -94,7 +94,7 @@ function mytheme_blocks_register()
                 'default' => 5
             ),
             'postCategories' => array(
-                'type' => 'string'
+                'type' => 'string',
             )
         )
     ));
@@ -132,3 +132,25 @@ function mytheme_blocks_render_latest_posts_block($attributes)
         return '<div>' . __("No Posts Found", "mytheme-blocks") . '</div>';
     }
 }
+
+function mytheme_blocks_register_post_template()
+{
+    $post_type_object = get_post_type_object('post');
+    $post_type_object->template = array(
+        array('mytheme-blocks/meta'),
+        array('core/paragraph', array(
+            'content' => 'adsflkj'
+        )),
+        array(
+            'mytheme-blocks/team-members',
+            array(
+                columns => 2
+            ),
+            array(
+                array('mytheme-blocks/team-member', array('title' => 'aslkjdfjad')),
+                array('mytheme-blocks/team-member'),
+            )
+        )
+    );
+}
+add_action('init', 'mytheme_blocks_register_post_template');
